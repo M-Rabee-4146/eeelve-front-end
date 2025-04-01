@@ -86,9 +86,9 @@ const App = () => {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-grow px-4 py-2 rounded-l-full focus:outline-none"
+                className="flex-grow md:px-4 px-3 py-2 rounded-l-full focus:outline-none"
               />
-              <button className="bg-gray-800 text-white px-6 py-2 rounded-r-full font-medium hover:bg-gray-700 transition-colors">
+              <button className="bg-gray-800 text-white md:px-6 px-3 py-2 rounded-r-full font-medium hover:bg-gray-700 transition-colors">
                 Subscribe
               </button>
             </div>
