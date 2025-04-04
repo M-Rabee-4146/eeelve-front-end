@@ -1,13 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Progress } from "flowbite-react";
 import { Link } from 'react-router-dom'
 import '/src/App.css'
+import { Eye, Heart } from 'lucide-react';
 
 const CardsMain = () => {
   const [hours,minutes,seconds]=[30,24,60]
+  const cards=['Card1','Card2','Card3','Card4','Card5','Card6','Card7','Card8'  ]
+    const [hoverState1, SetHoverState1] = useState(cards.reduce((acc, id) => ({
+          ...acc, [id]: false
+      })))
+      const handleMouseEnter1 = (id) => {
+        SetHoverState1((prev) => ({ ...prev, [id]: true }))
+    }
+    const handleMouseLeave1 = (id) => {
+        SetHoverState1((prev) => ({ ...prev, [id]: false }))
+    }
+// Active Links style 
+    const [activeLink,setActiveLink]=useState('Arrival')
+    const ArrivalActiveLink=()=>{
+      setActiveLink('Arrival')
+    }
+    const SaleActiveLink=()=>{
+      setActiveLink('Sale')
+    }
+    const TopActiveLink=()=>{
+      setActiveLink('Top')
+    }
+
   return (
     <div className='bg-gray-200 w-full h-full flex-col md:flex-row flex justify-center items-center'>
-      <div className="lg-card w-2/6 min-w-96 ">
+      <div className="lg-card md:w-2/6 min-w-96 ">
         <div className="p-4  w-full min-h-fit">
           <div className="h-full border-4 p-5  bg-white border-opacity-60 rounded-lg overflow-hidden  border-amber-400">
             <img className=" md:h-80 w-full object-cover object-center rounded-xl" src="https://dummyimage.com/720x400" alt="blog" />
@@ -59,87 +82,37 @@ const CardsMain = () => {
       </div>
       <div className="sm-cards w-full">
 <div className="links flex justify-center items-center mt-5 mb-2">
-  <Link className='mx-3 font-semibold border-b-2 border-amber-400'>New Arrival</Link>
-  <Link className='mx-1 font-semibold text-gray-600'>on Sale </Link>
-  <Link className='mx-3 font-semibold text-gray-600'>Top Rated</Link>
+  <Link className={`mx-3 ${activeLink=='Arrival'?'font-semibold border-amber-400':''}  border-b-2  hover:border-amber-400 text-gray-600 focus:text-gray-900 transition-all duration-500`} onClick={ArrivalActiveLink}>New Arrival</Link>
+  <Link className={`mx-1  ${activeLink=='Sale'?'font-semibold border-amber-400':''} border-b-2 hover:border-amber-400 text-gray-600 focus:text-gray-900 transition-all duration-500`} onClick={SaleActiveLink}>on Sale </Link>
+  <Link className={`mx-3  ${activeLink=='Top'?'font-semibold border-amber-400':''} border-b-2 hover:border-amber-400 text-gray-600 focus:text-gray-900 transition-all duration-500`} onClick={TopActiveLink}>Top Rated</Link>
 </div>
 <div className=' grid-flow-row grid lg:grid-cols-4 grid-cols-2 '>
 
-<div className="p-2 ">
-          <div className="h-full border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
-            <img className="lg:h-  md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
-            <div className="p-4 ">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <p className="leading-relaxed">$16.0</p>
+{cards.map((id,index) => (
+
+
+<div key={index} className="p-2 relative hover:drop-shadow-2xl transition-all duration-300" onMouseOver={() => handleMouseEnter1(id)} onMouseOut={() => handleMouseLeave1(id)}>
+    <Link>
+        <div className=" relative h-full border-2 min-h-72 hover:border-gray-200  bg-white border-transparent  border-opacity-60 rounded-lg overflow-hidde p-1">
+            <h1 className="title-font text-md font-medium text-gray-900 truncate line-clamp-2 text-wrap text-center p-1 hover:text-amber-400 transition-all duration-300 ">The Catalyzer Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatibus quasi ipsam neque assumenda, esse obcaecati ipsum eligendi dolores molestiae doloremque inventore soluta!</h1>
+            <img className="md:h-3/5 min-h-44  h-4/6 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
+            <div className="px-4 py-2 flex items-center">
+                {/* <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 hidden md:block">CATEGORY</h2> */}
+                <p className="leading-relaxed mx-1 text-red-600 font-semibold text-lg">$16.0</p>
+                <del className="leading-relaxed text-gray-500 font-normal">$20.0</del>
             </div>
-          </div>
-        </div>        <div className="p-2 ">
-          <div className="h-full min-h-48 border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden flex-col">
-            <div className="img  lg:w-auto md:h-36  h-3/5 ">
-            <img className=" object-cover object-center h-full w-full" src="/images/pic.jpg" alt="blog" />
-            </div>
-            <div className="md:p-4 p-2 ">
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 md:mb-1">CATEGORY</h2>
-              <p className="leading-relaxed">$16.0</p>
-            </div>
-          </div>
-        </div>        <div className="p-2 ">
-          <div className="h-full border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
-            <img className="lg:h-  md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
-            <div className="p-4 ">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <p className="leading-relaxed">$16.0</p>
-            </div>
-          </div>
-        </div>        <div className="p-2 ">
-          <div className="h-full border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
-            <img className="lg:h-  md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
-            <div className="p-4 ">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <p className="leading-relaxed">$16.0</p>
-            </div>
-          </div>
-        </div>        <div className="p-2 ">
-          <div className="h-full border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
-            <img className="lg:h-  md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
-            <div className="p-4 ">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <p className="leading-relaxed">$16.0</p>
-            </div>
-          </div>
-        </div>        <div className="p-2 ">
-          <div className="h-full border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
-            <img className="lg:h-  md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
-            <div className="p-4 ">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <p className="leading-relaxed">$16.0</p>
-            </div>
-          </div>
-        </div>        <div className="p-2 ">
-          <div className="h-full border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
-            <img className="lg:h-  md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
-            <div className="p-4 ">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <p className="leading-relaxed">$16.0</p>
-            </div>
-          </div>
-        </div>        <div className="p-2 ">
-          <div className="h-full border-2 bg-white border-gray-400 border-opacity-60 rounded-lg overflow-hidden">
-            <img className="lg:h-  md:h-36 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
-            <div className="p-4 ">
-              <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">CATEGORY</h2>
-              <h1 className="title-font text-lg font-medium text-gray-900 ">The Catalyzer</h1>
-              <p className="leading-relaxed">$16.0</p>
-            </div>
-          </div>
-        </div>
+        </div></Link>
+    {hoverState1[id] == true && (<div className={`hover_div mx-2 px-5 bg-white justify-center items-center absolute -bottom-1 border-2 border-t-gray-200 border-b-gray-200 border-gray-200  z-40 rounded-lg rounded-t-none left-0  hidden transition-all duration-300 lg:flex `} style={{ width: '93%' }}>
+        <Link className=' text-gray-600 hover:text-amber-400 transition-all duration-300'>
+            <span className='flex items-center px-1'><Eye className='size-5 text-gray-600 hover:text-amber-400 transition-all duration-300' />&nbsp;view</span>
+        </Link>
+        <Link className=' text-gray-600 hover:text-amber-400 transition-all duration-300'>
+            <span className='flex items-center px-1'><Heart className='size-5 text-gray-600 hover:text-amber-400 transition-all duration-300' />&nbsp;view</span>
+        </Link>
+    </div>)}
+</div>
+))
+}     
 </div>
 
       </div>

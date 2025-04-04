@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { ExclamationCircleIcon, HeartIcon, UserCircleIcon } from "@heroicons/react/16/solid"
 import { AtSymbolIcon } from "@heroicons/react/16/solid"
 import { PhotoIcon } from "@heroicons/react/24/solid"
-import CustomDropdownMenu from "./CustomDropdownMenu"
+import Dropdown_2 from "./Dropdown_2"
 // import { Button } from "@/components/ui/button"
 // import { Input } from "@/components/ui/input"
 
@@ -51,9 +51,9 @@ export default function Navbar() {
           <MapPin className="size-4 text-gray-600 mx-1" />
           <span className="text-gray-600 mr-3 text-sm">Store Location</span>
           <User2 className="size-4 text-gray-600 mx-1" />
-          <Link>    <span className="text-gray-600 mr-1 text-sm">Login or </span></Link>
-          <Link>
-            <span className="text-gray-600 mr-5 text-sm">Register</span>
+          <Link to={'/Login'} >    <span className="text-gray-600 mr-1 text-sm hover:text-amber-400 transition-all duration-300  ">Login  </span></Link><span className="text-gray-600"> Or</span>
+          <Link to={'/Register'}>
+            <span className="text-gray-600 mr-5 text-sm hover:text-amber-400 transition-all duration-300"> &nbsp;Register</span>
           </Link>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default function Navbar() {
             {/* Desktop navigation */}
             <div className="hidden md:flex items-center space-x-4">
               <button variant="outline" size="sm" asChild>
-                <User className="size-5" />
+                <Link to={'/Register'}><User className="size-5" /></Link>
               </button>
               <button size="sm" asChild>
                 <Heart className="size-5" />
@@ -124,7 +124,7 @@ export default function Navbar() {
              <Link href="/cart" onClick={toggleSearch} className="flex items-center text-gray-700 hover:text-primary transition-all mr-4 duration-500">
                 <SearchIcon className="h-5 w-5"   />
               </Link>
-             <Link href="/cart" className="flex items-center text-gray-700 hover:text-primary transition-colors mr-4 duration-500">
+             <Link href="/Login" className="flex items-center text-gray-700 hover:text-primary transition-colors mr-4 duration-500">
                 <User className="h-5 w-5" />
               </Link>
              <Link href="/cart" className="flex items-center text-gray-700 hover:text-primary transition-colors mr-4 duration-500">
@@ -199,11 +199,13 @@ export default function Navbar() {
         )} */}
       <div className="dropdown-1 mx-auto my-3 hidden md:flex items-center container md:px-10">
 
-<CustomDropdownMenu/>
-<Link className="mx-5 font-bold text-red-600">Home</Link>
+{/* <CustomDropdownMenu/> */}
+<Dropdown_2/>
+<Link to={'/'} className="mx-5 font-bold text-red-600">Home</Link>
 <Link className="mr-5 font-semibold text-gray-800 text-md">About Us</Link>
 <Link className="mr-5 font-semibold text-gray-800 text-md">Even Organics</Link>
-<Link className="mr-5 font-semibold text-gray-800 text-md">Best Sellers</Link>
+<Link className="mr-5 font-semibold text-gray-800 text-md relative ">Best Sellers </Link>
+
       </div>
       </nav>
     </div>

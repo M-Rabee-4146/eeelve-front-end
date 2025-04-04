@@ -53,16 +53,16 @@ const ProductCard_2 = () => {
             <div className="ParentOfCards flex flex-col md:flex-row container mx-auto">
                 <div className="Pcard-1 md:w-2/6">
                     <div className=' grid-flow-row grid grid-cols-2 '>
-                        {cardids_1strow.map((id) => (
+                        {cardids_1strow.map((id,index) => (
 
 
-                            <div className="p-2 relative hover:drop-shadow-2xl" onMouseOver={() => handleMouseEnter1(id)} onMouseOut={() => handleMouseLeave1(id)}>
+                            <div  key={index} className="p-2 relative hover:drop-shadow-2xl transition-all duration-300" onMouseOver={() => handleMouseEnter1(id)} onMouseOut={() => handleMouseLeave1(id)}>
                                 <Link>
                                     <div className=" relative h-full border-2 min-h-72 hover:border-gray-200  bg-white border-transparent  border-opacity-60 rounded-lg overflow-hidde p-1">
                                         <h1 className="title-font text-md font-medium text-gray-900 truncate line-clamp-2 text-wrap text-center p-1 hover:text-amber-400 transition-all duration-300 ">The Catalyzer Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatibus quasi ipsam neque assumenda, esse obcaecati ipsum eligendi dolores molestiae doloremque inventore soluta!</h1>
                                         <img className="md:h-3/5 min-h-44  h-4/6 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
                                         <div className="px-4 py-2 flex items-center">
-                                            <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 hidden md:block">CATEGORY</h2>
+                                            {/* <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 hidden md:block">CATEGORY</h2> */}
                                             <p className="leading-relaxed mx-1 text-red-600 font-semibold text-lg">$16.0</p>
                                             <del className="leading-relaxed text-gray-500 font-normal">$20.0</del>
                                         </div>
@@ -83,13 +83,13 @@ const ProductCard_2 = () => {
                 <div className="Pcard-2 md:w-2/6">
                     <div className=' h-full w-full '>
 
-                        <div className="p-2 relative hover:drop-shadow-2xl h-full" onMouseOver={hoverIsOn} onMouseOut={hoverIsOff}>
+                        <div className="p-2 relative hover:drop-shadow-2xl h-full transition-all duration-300" onMouseOver={hoverIsOn} onMouseOut={hoverIsOff}>
                             <Link>
                                 <div className=" relative h-full border-2 min-h-72 hover:border-gray-200  bg-white border-transparent  border-opacity-60 rounded-lg overflow-hidde p-1 flex flex-col justify-center">
                                     <h1 className="title-font text-md font-medium text-gray-900 truncate line-clamp-2 text-wrap text-center p-1 hover:text-amber-400 transition-all duration-300 ">The Catalyzer Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatibus quasi ipsam neque assumenda, esse obcaecati ipsum eligendi dolores molestiae doloremque inventore soluta!</h1>
                                     <img className="md:min-h-3/5 min-h-44  h-3/4 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
                                     <div className="px-4 py-2 flex items-center">
-                                            <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 hidden md:block">CATEGORY</h2>
+                                            {/* <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 hidden md:block">CATEGORY</h2> */}
                                             <p className="leading-relaxed mx-1 text-red-600 font-semibold text-lg">$16.0</p>
                                             <del className="leading-relaxed text-gray-500 font-normal">$20.0</del>
                                         </div>
@@ -107,16 +107,16 @@ const ProductCard_2 = () => {
                 </div>
                 <div className="Pcard-3 md:w-2/6">
                     <div className=' grid-flow-row grid grid-cols-2 '>
-                        {cardids_2strow.map((id) => (
+                        {cardids_2strow.map((id,index) => (
 
 
-                            <div className="p-2 relative hover:drop-shadow-2xl" onMouseOver={() => handleMouseEnter2(id)} onMouseOut={() => handleMouseLeave2(id)}>
+                            <div key={index} className="p-2 relative hover:drop-shadow-2xl transition-all duration-300" onMouseOver={() => handleMouseEnter2(id)} onMouseOut={() => handleMouseLeave2(id)}>
                                 <Link>
                                     <div className=" relative h-full border-2 min-h-72 hover:border-gray-200  bg-white border-transparent  border-opacity-60 rounded-lg overflow-hidde p-1">
                                         <h1 className="title-font text-md font-medium text-gray-900 truncate line-clamp-2 text-wrap text-center p-1 hover:text-amber-400 transition-all duration-300 ">The Catalyzer Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit voluptatibus quasi ipsam neque assumenda, esse obcaecati ipsum eligendi dolores molestiae doloremque inventore soluta!</h1>
                                         <img className="md:h-3/5 min-h-44  h-4/6 w-full object-cover object-center" src="https://dummyimage.com/720x400" alt="blog" />
                                         <div className="px-4 py-2 flex items-center">
-                                            <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 hidden md:block">CATEGORY</h2>
+                                            {/* <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 hidden md:block">CATEGORY</h2> */}
                                             <p className="leading-relaxed mx-1 text-red-600 font-semibold text-lg">$16.0</p>
                                             <del className="leading-relaxed text-gray-500 font-normal">$20.0</del>
                                         </div>
