@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Slider from '../components/Slider'
 import CardsMain from '../components/CardsMain'
 import TopProducts from '../components/TopProducts'
@@ -6,8 +6,23 @@ import ProductCard_2 from '../components/ProductCard_2'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Newsletter from '../components/Newsletter'
+import { useDispatch, useSelector } from 'react-redux'
+import { getallproducts } from '../Redux_toolkit/Features/Product'
+import { data, Link, useNavigate } from 'react-router-dom'
+import Product_detail from './Product_detail'
+import { persistor } from '../Redux_toolkit/store/store'
+import { logout } from '../Redux_toolkit/Features/auth'
 
 const Home = () => {
+    const { products } = useSelector((state) => state.prod);
+    const dispatch = useDispatch();
+    const catYoutube = products.filter((data) => data.cardType === 'youtube');
+    const navigate=useNavigate()
+  
+
+    useEffect(() => {
+      dispatch(getallproducts());
+    }, []);
      const [ReadMore, SetReadMore] = useState(false)
       const readMoreWorking = () => {
         SetReadMore(!ReadMore)
@@ -24,10 +39,19 @@ const Home = () => {
       }
     
       // 4 imgs map 
-      const img_cardids=['card1','card2','card3','card4']
+      const img_cardids=catYoutube
+
+      // const {token}=useSelector((state)=>state.auth)
+      // useEffect((e)=>{
+      //   if(!token){
+      //     dispatch(logout());
+      //     persistor.purge('auth'); // also wipe persisted state
+      //     navigate('/api/Login');
+      //   }
+      // },[])
     
   return (
-    <div>
+    <div id='my-scrollbar'>
        <div className="card ">
        <Navbar/>
         <Slider />
@@ -52,10 +76,12 @@ const Home = () => {
           )}
           <button onClick={readMoreWorking}>{ReadMore == true ? "Read Less" : "Read More"}</button>
           <div className="cards my-5 grid lg:grid-cols-4 grid-cols-2 lg:gap-x-2 gap-x-4">
-            {img_cardids.map((id,index)=>(
-              <div key={index} className={`img  mb-5 grayscale-0 hover:grayscale-0 transition-all duration-300 ${HoverMobile == true ? 'md:grayscale-0' : 'md:grayscale'}`} onTouchStart={onTouchStart} onTouchCancel={untouch} onTouchEnd={onTouchEnd}>
-              <img src="/images/pic.jpg" alt="" />
+            {img_cardids.map((data,index)=>(
+              <Link to={data.youtubeLink} key={data._id} target='_blank'>
+              <div  className={`img  mb-5 grayscale-0 hover:grayscale-0 transition-all duration-300 ${HoverMobile == true ? 'md:grayscale-0' : 'md:grayscale'}`} onTouchStart={onTouchStart} onTouchCancel={untouch} onTouchEnd={onTouchEnd}>
+              <img src={data.image} alt={data.title} />
             </div>
+              </Link>
           ))}
           </div>
         </div>

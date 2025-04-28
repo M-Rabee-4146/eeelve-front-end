@@ -1,7 +1,11 @@
-import React from 'react'
-import { Send, Facebook, Instagram, Clock, Mail, Phone, ChevronUp, MessageCircle } from "lucide-react"
+import React, { useState } from 'react'
+import { Send, Facebook, Instagram, Clock, Mail, Phone, ChevronUp, MessageCircle, AppWindowMacIcon } from "lucide-react"
+import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Footer = () => {
+    const [open, setOpen] = useState(false)
+    const role=useSelector((state)=>state.auth.role)
     return (
         <div>
 
@@ -12,7 +16,7 @@ const Footer = () => {
                         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                             {/* Logo and Social */}
                             <div className="col-span-1">
-                               <img className='mb-5' src="./images/logo.avif" alt="" />
+                                <img className='mb-5' src="./images/logo.avif" alt="" />
 
                                 <div className="flex space-x-4 mt-4">
                                     <a href="#" className="text-gray-700 hover:text-amber-400 transition-all duration-300">
@@ -65,19 +69,22 @@ const Footer = () => {
 
                             {/* Contact Us */}
                             <div className="col-span-1">
-                                <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+                                <h3 className="text-lg font-semibold mb-4 " onClick={() => setOpen(!open)}>Contact Us</h3>
                                 <ul className="space-y-3">
-                                    <li className="flex items-start hover:text-amber-400 transition-all duration-300">
+                                    <li className={` ${open === true ? 'flex opacity-100 translate-x-0 h-auto' : 'opacity-0 translate-x-10 h-0 '} ease-in-out delay-75      overflow-hidden                              
+                                    md:flex items-start hover:text-amber-400 transition-all duration-300`}>
                                         <Clock className="h-5 w-5 mr-2 text-gray-600 mt-0.5 hover:text-amber-400 transition-all duration-300" />
-                                        <span className="text-gray-600 hover:text-amber-400 transition-all duration-300">Mon - Sun / 9:00 AM - 11:00 PM</span>
+                                       <span className="text-gray-600 hover:text-amber-400 transetOpen(!open duration-300">Mon - Sun / 9:00 AM - 11:00 PM</span>
                                     </li>
-                                    <li className="flex items-start">
+                                    <li className={` ${open === true ? 'flex opacity-100 translate-x-0' : 'opacity-0 translate-x-10 h-0 '} ease-in-out  transition-all overflow-hidden delay-75                                    
+                                     md:flex items-start`}>
                                         <Mail className="h-5 w-5 mr-2 text-gray-600 mt-0.5 hover:text-amber-400 transition-all duration-300" />
                                         <a href="mailto:rabijamil8@gmail.com" className="text-gray-600 hover:text-amber-400 transition-all duration-300">
                                             rabijamil8@gmail.com
                                         </a>
                                     </li>
-                                    <li className="flex items-start">
+                                    <li className={` ${open === true ? 'flex opacity-100 translate-x-0' : 'opacity-0 translate-x-10 h-0 overflow-hidden'} ease-in-out transition-all delay-75                                    
+                                     md:flex items-start`}>
                                         <Phone className="h-5 w-5 mr-2 text-gray-600 hover:text-amber-400 transition-all duration-300 mt-0.5" />
                                         <a href="tel:+923094053841" className="text-gray-600 hover:text-amber-400 transition-all duration-300">
                                             +92 309-4053841
@@ -98,6 +105,16 @@ const Footer = () => {
                                 <MessageCircle className="h-6 w-6" />
                             </a>
                         </div>
+                        {role==='admin' &&  <div className="fixed bottom-[140px] right-6 z-50">
+                            <Link
+                                to="/admin"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="bg-green-500 hover:bg-green-600 text-white p-3 rounded-full shadow-lg flex items-center justify-center"
+                            >
+                                <AppWindowMacIcon className="h-6 w-6" />
+                            </Link>
+                        </div>}
 
                         {/* Back to Top Button */}
                         <div className="fixed bottom-6 right-6 z-50">

@@ -1,70 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getallproducts } from '../Redux_toolkit/Features/Product';
 
 function Slider() {
+  const { products } = useSelector((state) => state.prod);
+  const dispatch = useDispatch();
+  const ismobile = window.matchMedia("(max-width: 768px)").matches;
+  const selected_product = ismobile ? 'slidermobile' : 'slider';
+  const catSlider = products.filter((data) => data.cardType === selected_product);
+
+  useEffect(() => {
+    dispatch(getallproducts());
+  }, []);
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  
-  const galleryImages = [
-    { id: 1, src:"/images/pic.jpg", alt: "Gallery image 1" },
-    { id: 2, src: "/placeholder.svg?height=800&width=1600", alt: "Gallery image 2" },
-    { id: 3, src: "/placeholder.svg?height=800&width=1600", alt: "Gallery image 3" },
-    { id: 4, src: "/placeholder.svg?height=800&width=1600", alt: "Gallery image 4" }
-  ];
-  
-  // Function to go to a specific slide
+  const intervalRef = useRef(null);
+
+  const galleryImages = catSlider;
+
   const handleGoToSlide = (index) => {
     if (isTransitioning) return;
-    
     setIsTransitioning(true);
     setCurrentIndex(index);
-    
-    // Reset transition state after animation completes
     setTimeout(() => {
       setIsTransitioning(false);
     }, 600);
   };
 
-  // Function to go to the next slide
   const handleNext = () => {
-    const nextIndex = (currentIndex + 1) % galleryImages.length;
-    handleGoToSlide(nextIndex);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % galleryImages.length);
   };
 
-  // Function to go to the previous slide
   const handlePrevious = () => {
-    const prevIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-    handleGoToSlide(prevIndex);
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + galleryImages.length) % galleryImages.length);
   };
 
-  // Auto-advance slides
   useEffect(() => {
-    // Only auto-advance if not hovering
-    if (isHovering) return;
-    
-    const slideInterval = setInterval(() => {
-      handleNext();
-    }, 2000); // Change slide every 4 seconds
+    intervalRef.current = setInterval(handleNext, 4000);
 
-    return () => clearInterval(slideInterval);
-  }, [currentIndex, isHovering]);
+    return () => clearInterval(intervalRef.current);
+  }, []);
 
   return (
-    <div 
-      className="relative w-full h-[50vh] md:h-[70vh] lg:h-[80vh] overflow-hidden group"
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
-    >
+    <div className="relative w-full h-[30vh] md:h-[50vh] lg:h-[60vh] overflow-hidden group">
       {/* Image container */}
-      <div 
+      <div
         className="flex h-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {galleryImages.map((image) => (
-          <div key={image.id} className="flex-shrink-0 w-full h-full relative">
+        {galleryImages.map((data,index) => (
+          <div key={data._id} className="flex-shrink-0 w-full h-full relative">
             <img
-              src={image.src || "/placeholder.svg"}
-              alt={image.alt}
+              src={data.image || "/placeholder.svg"}
+              alt={data.name}
               className="object-cover w-full h-full"
             />
           </div>
@@ -81,7 +70,7 @@ function Slider() {
           <polyline points="15 18 9 12 15 6"></polyline>
         </svg>
       </button>
-      
+
       <button
         onClick={handleNext}
         className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full transition-all duration-300 opacity-0 group-hover:opacity-100 focus:opacity-100"
@@ -93,10 +82,10 @@ function Slider() {
       </button>
 
       {/* Indicator dots */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex space-x-3">
+      <div className="absolute bottom-6 left-1/2 -right-1/2 right z-20 flex space-x-3">
         {galleryImages.map((_, index) => (
           <button
-            key={index}
+            key={_._id}
             onClick={() => handleGoToSlide(index)}
             className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
               index === currentIndex ? 'bg-white scale-125' : 'bg-white/50 hover:bg-white/80'
