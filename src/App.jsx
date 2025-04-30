@@ -12,6 +12,7 @@ import Product_detail from './Pages/Product_detail'
 import AuthWatcher from './hook/AuthWatcher'
 import { ScrollbarPlugin } from 'smooth-scrollbar'
 import CartPage from './Pages/CartPage'
+import Checkout from './Pages/Checkout'
 // import SmoothScrollContainer from './MiddleWare/SmoothScrollContainer'
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
           <Route path="/api/:linkOrParam" element={<AuthPage />} />
           <Route path="/product/:id" element={<Product_detail />} />
           <Route path="/product/Cart" element={<CartPage />} />
+          <Route path="/product/Cart/Checkout" element={<Checkout/>} />
           <Route path="/" element={<Home />} />
       </Routes>
       <AuthWatcher />

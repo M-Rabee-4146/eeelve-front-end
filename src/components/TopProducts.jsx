@@ -130,8 +130,8 @@ const TopProducts = () => {
         {/* Big-right Image  */}
      { Side_img &&  <Link to={`/product/${Side_img._id}`}>
         <div className="Big-1-Product relative  w-full p-3 flex items-center rounded-xl overflow-hidden">
-          <div className="img-card rounded-xl  border overflow-hidden md:min-w-60 w-full h-96 min-w-full hover:drop-shadow-2xl transition-all duration-300">
-            <img src={Side_img.image} alt="" className='object-cover h-full' />
+          <div className="img-card rounded-xl  border overflow-hidden md:min-w-60 w-full h-96  hover:drop-shadow-2xl transition-all duration-300">
+            <img src={Side_img.image} alt="" className='object-cover md:w-full sm:h-full lg:h-full' />
           </div>
         {role === 'admin' &&
         

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import { Breadcrumb, BreadcrumbItem } from 'flowbite-react'
 import { HiHome } from 'react-icons/hi'
@@ -13,6 +13,12 @@ import { useNavigate } from 'react-router-dom'
 
 const CartPage = () => {
     const cart = useSelector((state) => state.CART.cart)
+    // const [quote,setquote]=useState('')
+    const [shippingData,setshippingData]=useState({country:'pakistan',quote:'',note:''})
+    const shipingHandler=(e)=>{
+       setshippingData(shippingData=>({...shippingData,[e.target.name]:e.target.value}))
+       console.log(shippingData)
+    }
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const getTotal = () => {
@@ -89,35 +95,35 @@ const CartPage = () => {
                     </div> : <div className=' my-5 flex flex-col items-center'><h1 className=' text-xl py-2'>Your Cart is Empty</h1>
                         <button onClick={() => { navigate('/') }} className='w-80 bg-gray-200 h-12 my-2 rounded-3xl font-semibold text-gray-700 hover:bg-amber-400 hover:text-black transition-all duration-300 text-[15px]'>Continue Shopping</button></div>}
             </div>
-            <div className="cart-divided container flex flex-col md:flex-row mx-5">
-                <div className="left-cart md:w-[55%] w-full  px-3">
+            <div className="cart-divided container flex flex-col md:flex-row md:mx-5">
+                <div className="left-cart md:w-[55%] w-full  px-5">
                     <h1 className='text-2xl mx-5 font-semibold mt-2 mb-4 text-gray-700 hidden md:block'>Estimated Shipping</h1>
                     <div className="  flex-col lg:flex-row justify-center items-center  hidden md:flex">
 
-                        <select className='rounded-3xl w-full mb-3 px-5 mx-5 border border-gray-400' name="flexry" id="">
+                        <select onChange={shipingHandler} value={shippingData.country} className='rounded-3xl w-full my-1 px-5 mx-5 border border-gray-400' name="flexry" id="">
                             <option value="pakistan">Pakistan</option>
                         </select>
-                        <input type="text" className='rounded-3xl w-full  border border-gray-400 px-5' value={30235} />
+                        <input type="text" name='quote' onChange={shipingHandler} className='rounded-3xl w-full my-1 border border-gray-400 px-5' value={shippingData.quote} />
 
                     </div>
-                    <div className="quote-btn flex justify-end">
-                        <button onClick={() => 'hello'} className='w-40 mx-1  bg-gray-200 h-12 my-5 rounded-3xl font-semibold text-[15px]  text-gray-700 hover:bg-amber-400 hover:text-black transition-all duration-300'>Get a Quote</button>
+                    <div className="quote-btn md:flex hidden justify-end">
+                        <button type='submit' className='w-40 mx-1  bg-gray-200 h-12 my-5 rounded-3xl font-semibold text-[15px]  text-gray-700 hover:bg-amber-400 hover:text-black transition-all duration-300'>Get a Quote</button>
                     </div>
-                    <div className="txt mx-5 text-gray-700 ">
+                   {shippingData.quote!=='' && <div className="txt mx-5 text-gray-700 md:block hidden ">
                         <h1>There is one shipping rate available for your address.</h1>
                         <h1>Standard Shipping: Rs.200.00</h1>
-                    </div>
+                    </div>}
                     <div className="note mt-3 flex flex-col">
                         <label className='text-xl mx-5 font-semibold  text-gray-700' htmlFor="note">Add a Note to Your Order</label>
-                        <textarea name="note" className='rounded-2xl mx-5 my-3 h-36 border-gray-400'></textarea>
+                        <textarea value={shippingData.note} name='note' onChange={shipingHandler}  className='rounded-2xl md:mx-5 mx-2 my-3 h-36 border-gray-400'></textarea>
                     </div>
                 </div>
-                <div className="right-cart w-[45%]  pl-3">
+                <div className="right-cart md:w-[45%] w-full  px-5">
                     <div className="total flex justify-between items-center my-2 border-b border-b-gray-300">
                         <h1 className='text-2xl text-gray-700 font-semibold'>Cart Total</h1>
-                        <h1 className='text-2xl text-gray-700 font-semibold'>Rs.2000.00</h1>
+                        <h1 className='text-2xl text-gray-700 font-semibold'>Rs.{(getTotal().totalprice).toFixed(2)}</h1>
                     </div>
-                    <button onClick={() => { navigate('/') }} className='w-full  mx-auto bg-amber-400  h-12 my-2 rounded-3xl font-semibold text-gray-700 hover:bg-black hover:text-white transition-all duration-300 text-[15px]'>Proceed To Checkout</button>
+                    <button onClick={() => { navigate('/product/Cart/Checkout') }} className='w-full  mx-auto bg-amber-400  h-12 my-2 rounded-3xl font-semibold text-gray-700 hover:bg-black hover:text-white transition-all duration-300 text-[15px]'>Proceed To Checkout</button>
                 </div>
 
             </div>

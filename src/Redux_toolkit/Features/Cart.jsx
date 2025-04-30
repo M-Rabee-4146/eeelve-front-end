@@ -7,7 +7,7 @@ const CartSlice=createSlice({
     },
     reducers:{
         addToCart:(state,action)=>{
-            // console.log(action.payload.quantity)
+            // console.log(action.payload)
             const IteminCart=state.cart.find((item)=>item._id==action.payload._id);
             if(IteminCart){
                 if(action.payload.quantity){
@@ -22,7 +22,7 @@ const CartSlice=createSlice({
             }else{
                 if(action.payload.quantity){
                     state.cart.push({...action.payload})
-                    console.log(action.payload.quantity)
+                    // console.log(action.payload.quantity)
                 }else{
                     state.cart.push({...action.payload,quantity:1})
                 }

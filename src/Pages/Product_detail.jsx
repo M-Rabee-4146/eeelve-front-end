@@ -12,12 +12,13 @@ import { addToCart, ClearCart } from '../Redux_toolkit/Features/Cart'
 const Product_detail = () => {
   const { id } = useParams('')
   const dispatch = useDispatch();
-  console.log(id)
+  // console.log(id)
   // console.log(dispatch)
  useEffect(()=>{
   // console.log(id)
   dispatch(getsingleproduct(id))
  },[id,dispatch])
+ const [quantityH,setquantityH]=useState(1)
   const { selectedProduct, error } = useSelector((state) => state.prod)
   const cartdata=selectedProduct
   var{_id,title,image,price,quantity}=cartdata
@@ -53,8 +54,9 @@ const Product_detail = () => {
   
   const quantityHandler=(qty)=>{
     // ({...selectedProduct,quantity:qty})
-    quantity=parseInt(qty)
-    console.log(quantity)
+    setquantityH(parseInt(qty))
+    quantity=quantityH
+    // console.log(quantity)
 }
 // Categories
 const categories = [
@@ -235,10 +237,12 @@ const categories = [
                     <div className="quantity flex items-end">
                       <form action="" className='flex flex-col'>
                         <label htmlFor="qty" className='text-gray-600 my-2'>Quantity</label>
-                        <input type="number" name="qty" className=' rounded-3xl w-36 h-9' defaultValue={1} onChange={(e)=>quantityHandler(e.target.value)} />
+                        <input type="number" name="qty" className=' rounded-3xl w-36 h-9' value={quantityH} onChange={(e)=>quantityHandler(e.target.value)} />
                       </form>
                       <button className=' rounded-3xl mx-2 w-52 font-semibold h-12 border bg-amber-400 hover:bg-black hover:text-white transition-all duration-300' onClick={()=>{
-                        dispatch(addToCart({_id,title,image,price,quantity}))
+                        dispatch(addToCart({_id,title,image,price,quantity:quantityH}))
+                        setquantityH(1)
+
                       }}>Add to Cart</button>
                     </div>
                     <button className=' rounded-3xl my-5   w-full font-semibold h-12 border bg-black hover:bg-amber-400 hover:text-black text-white transition-all duration-300'>Buy Now</button>
@@ -258,9 +262,9 @@ const categories = [
                 </div>
               </div>
             </div>
-        <div className="des mx-5 my-3 ">
+        <div className="des md:mx-5 my-3 ">
           <h3 className='mx-auto max-w-max relative my-2 font-bold text-gray-700 text-lg border-b-amber-400 border-b-2     '>Description</h3>
-        <div className="description border  p-10 max-h-max rounded-xl border-gray-400 ">
+        <div className="description border  md:p-10 p-5 max-h-max rounded-xl border-gray-400 ">
             <p className='text-gray-700 '>{selectedProduct.description}</p>
           </div>
         </div>
