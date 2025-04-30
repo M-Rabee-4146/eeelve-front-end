@@ -14,10 +14,10 @@ const Product_detail = () => {
   const dispatch = useDispatch();
   // console.log(id)
   // console.log(dispatch)
-//  useEffect(()=>{
+ useEffect(()=>{
   // console.log(id)
   dispatch(getsingleproduct(id))
-//  },[id,dispatch])
+ },[id,dispatch])
  const [quantityH,setquantityH]=useState(1)
   const { selectedProduct, error } = useSelector((state) => state.prod)
   const cartdata=selectedProduct
