@@ -21,7 +21,7 @@ const Product_detail = () => {
  const [quantityH,setquantityH]=useState(1)
   const { selectedProduct, error } = useSelector((state) => state.prod)
   const cartdata=selectedProduct
-  var{_id,title,image,price,quantity}=cartdata
+  const {_id,title,image,price,quantity}=cartdata
   // console.log(error)
   // console.log(selectedProduct)
 
