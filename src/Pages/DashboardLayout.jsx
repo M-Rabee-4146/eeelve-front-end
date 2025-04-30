@@ -1,5 +1,5 @@
 import React from 'react'
-import Dasshboarduiverse from '../components/dasshboarduiverse'
+import Dasshboarduiverse from '../components/Dasshboarduiverse.jsx'
 import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
