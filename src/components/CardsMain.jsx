@@ -18,7 +18,7 @@ const CardsMain = () => {
     dispatch(getallproducts());
   }, []);
 
-  const timerCard = products.find((data) => data.cardType === 'timer')
+  const timerCard = products.find((data) => data.cardType === 'timer')||{}
   // console.log(timerCard)
   const { hours, minutes, seconds } = useCountdown(timerCard?.timerEndsAt)
   // console.log(timerCard._id)
