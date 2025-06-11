@@ -7,7 +7,7 @@ function Slider() {
   const dispatch = useDispatch();
   const ismobile = window.matchMedia("(max-width: 768px)").matches;
   const selected_product = ismobile ? 'slidermobile' : 'slider';
-  const catSlider = products.filter((data) => data.cardType === selected_product);
+  const catSlider =[]|| products.filter((data) => data.cardType === selected_product);
 
   useEffect(() => {
     dispatch(getallproducts());
