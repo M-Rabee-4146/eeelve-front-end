@@ -6,12 +6,12 @@ import { deleteproductbyid, getallproducts } from '../Redux_toolkit/Features/Pro
 import toast from 'react-hot-toast'
 
 const ProductCard_2 = () => {
-     const { products } = useSelector((state) => state.prod);
+     const { products } = useSelector((state) => state.prod)||[];
       const dispatch = useDispatch();
       // const ExcludedCards = ["youtube", 'slider', 'slidermobile', 'center-big', 'side-big','popular','sale','timer'];
       // const catCards = products.filter((data) => !ExcludedCards.includes(data.cardType));
-      const catCards = []||products.filter((data) =>data.category=='kitchen');
-      const BigCard = {}||products.find((data) =>data.cardType=='center-big');
+      const catCards = products.filter((data) =>data.category=='kitchen')||[];
+      const BigCard = products.find((data) =>data.cardType=='center-big')||{};
       const First4Cards = catCards.slice(0, 4);
       const Second4Cards = catCards.slice(4, 8);
       useEffect(() => {
