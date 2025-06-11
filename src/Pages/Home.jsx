@@ -16,7 +16,7 @@ import { logout } from '../Redux_toolkit/Features/auth'
 const Home = () => {
     const { products } = useSelector((state) => state.prod);
     const dispatch = useDispatch();
-    const catYoutube = products.filter((data) => data.cardType === 'youtube');
+    const catYoutube =[]|| products.filter((data) => data.cardType === 'youtube');
     const navigate=useNavigate()
   
 
