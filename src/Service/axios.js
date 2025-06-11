@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { logout } from "../Redux_toolkit/Features/auth";
 
 const axiosinstance=axios.create({
-    baseURL:"http://localhost:3200/api",
+    baseURL:"server-eveen.railway.internal/api",
     withCredentials:true
 });
 
