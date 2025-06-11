@@ -12,7 +12,7 @@ const CardsMain = () => {
   const { products } = useSelector((state) => state.prod);
   const dispatch = useDispatch();
   const ExcludedCards = ["youtube", 'slider', 'slidermobile', 'center-big', 'side-big', 'popular', 'sale', 'timer'];
-  const catCards = products.filter((data) => !ExcludedCards.includes(data.cardType));
+  const catCards =[]|| products.filter((data) => !ExcludedCards.includes(data.cardType));
   const sixCards = catCards.slice(0, 8);
   useEffect(() => {
     dispatch(getallproducts());
