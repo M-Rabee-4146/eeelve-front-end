@@ -19,7 +19,7 @@ const TopProducts = () => {
   const catPopular=[]||products.filter((data)=>data.cardType=='popular')
   const limitOf3Onpopular = catPopular.slice(0, 3);
   
-  const Side_img=products.find((data)=>data.cardType=='side-big')
+  const Side_img=products.find((data)=>data.cardType=='side-big')||{}
   // console.log(Side_img)
   
   useEffect(() => {
