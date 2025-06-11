@@ -9,16 +9,16 @@ import toast from 'react-hot-toast';
 import useCountdown from '../hook/Countdown';
 
 const CardsMain = () => {
-  const { products } = useSelector((state) => state.prod);
+  const { products } = useSelector((state) => state.prod)||[];
   const dispatch = useDispatch();
   const ExcludedCards = ["youtube", 'slider', 'slidermobile', 'center-big', 'side-big', 'popular', 'sale', 'timer'];
-  const catCards =[]|| products.filter((data) => !ExcludedCards.includes(data.cardType));
+  const catCards =products.filter((data) => !ExcludedCards.includes(data.cardType))||[];
   const sixCards = catCards.slice(0, 8);
   useEffect(() => {
     dispatch(getallproducts());
   }, []);
 
-  const timerCard ={}|| products.find((data) => data.cardType == 'timer')
+  const timerCard = products.find((data) => data.cardType == 'timer')||{}
   // console.log(timerCard)
   const { hours, minutes, seconds } = useCountdown(timerCard?.timerEndsAt)
   // console.log(timerCard._id)
