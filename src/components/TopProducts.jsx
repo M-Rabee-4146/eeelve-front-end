@@ -9,14 +9,14 @@ const TopProducts = () => {
   const { products } = useSelector((state) => state.prod)
   const dispatch = useDispatch()
 
-  const Featured_Card=products.filter((data)=>data.cardType=='featured')
+  const Featured_Card=[]||products.filter((data)=>data.cardType=='featured')
     const limitOf3OnFeature = Featured_Card.slice(0, 3);
   // console.log(products)
   
-  const catSale=products.filter((data)=>data.cardType=='sale')
+  const catSale=[]||products.filter((data)=>data.cardType=='sale')
   const limitOf3OnSale = catSale.slice(0, 3);
 
-  const catPopular=products.filter((data)=>data.cardType=='popular')
+  const catPopular=[]||products.filter((data)=>data.cardType=='popular')
   const limitOf3Onpopular = catPopular.slice(0, 3);
   
   const Side_img=products.find((data)=>data.cardType=='side-big')
