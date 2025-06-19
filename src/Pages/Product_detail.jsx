@@ -15,15 +15,15 @@ const Product_detail = () => {
   console.log(id)
   // console.log(dispatch)
  useEffect(()=>{
-  // console.log(id)
   dispatch(getsingleproduct(id))
+  console.log(getsingleproduct(id))
  },[id,dispatch])
  const [quantityH,setquantityH]=useState(1)
   const { selectedProduct, error } = useSelector((state) => state.prod)
   const cartdata=selectedProduct
+  console.log(selectedProduct)
   const {_id,title,image,price,quantity}=cartdata
   // console.log(error)
-  console.log(selectedProduct)
 
   const [selectedColor, setSelectedColor] = useState("blue")
   const [countdown, setCountdown] = useState({ hours: 24, minutes: 11, seconds: 25 })
