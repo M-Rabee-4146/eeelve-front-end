@@ -12,7 +12,7 @@ import { addToCart, ClearCart } from '../Redux_toolkit/Features/Cart'
 const Product_detail = () => {
   const { id } = useParams('')
   const dispatch = useDispatch();
-  // console.log(id)
+  console.log(id)
   // console.log(dispatch)
  useEffect(()=>{
   // console.log(id)
@@ -23,7 +23,7 @@ const Product_detail = () => {
   const cartdata=selectedProduct
   const {_id,title,image,price,quantity}=cartdata
   // console.log(error)
-  // console.log(selectedProduct)
+  console.log(selectedProduct)
 
   const [selectedColor, setSelectedColor] = useState("blue")
   const [countdown, setCountdown] = useState({ hours: 24, minutes: 11, seconds: 25 })
